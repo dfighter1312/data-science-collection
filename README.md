@@ -14,7 +14,7 @@ The repository is divided into topic, and each topic's material in within a fold
 
 1. Topic 1 - Predict Hotel Cancellations
 2. Topic 2 - Predict Student Performance From Game Play (from Kaggle)
-3. Topic 3 - Electric Moped Reviews (for DataCamp DS Associate Certificate
+3. Topic 3 - Electric Moped Reviews (for DataCamp DS Associate Certificate)
 4. Topic 4 - Portfolio Risk Management *(ongoing)*
 
 ### Data Engineering
