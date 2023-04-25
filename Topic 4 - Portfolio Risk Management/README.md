@@ -2,7 +2,9 @@
 
 ## What this repository do?
 
-A hands-on project on portfolio risk management, while learn the course **Introduction to Portfolio Risk Management in Python** on DataCamp.
+A hands-on project on portfolio risk management, while learn the course **Introduction to Portfolio Risk Management in Python** on DataCamp (in `topic_4_course_1.ipynb`).
+
+I have added a note for course **Quantitative Risk Management in Python** in `topic_4_couse_2.ipynb`, which extends the risk management methodology with more advanced concepts. However, this should be for reading at the moment only.
 
 ## Struggle and Derived Tips during implementation
 
