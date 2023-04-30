@@ -9,7 +9,7 @@ In general, I do give 2 recommendations:
 - We can employ a Random Forest classifier with a testing F1-score of 81% in order to identify a potential threat of cancellation. For these bookings, the staff can make a phone call to confirm their booking. Before implementation, we can done an experiment of calling the customers of potential cancels, and then observe the improvement of this suggestion.
 - One can limit the number of lead time (strongest indicator of cancellation), week nights and weekday nights (minor indicators) for first-time customer.
 
-Further details can be accessed on `topic_1.ipynb` notebook.
+Further details can be accessed on `topic_1.ipynb` and `topic_1_hyp_test.ipynb` notebook.
 
 ## Struggle and Derived Tips during implementation
 
@@ -24,3 +24,7 @@ You can see a really dummy analysis of me on `brainstorming_1.ipynb` when I don'
 - Perform full analysis between all features (optional, use heatmap or pair plot for this).
 - Modeling and hypothesis testing.
 - Make conclusion.
+
+**2. Hypothesis testing**
+
+After taking a revision on hypothesis testing, I decided to revisit this problem and add a notebook `topic_1_hyp_test.ipynb` which explain the process of hypothesis testing more precisely. In fact, there is one change happened on among all the tests in the main notebook. However, I will keep the content in `topic_1.ipynb` the same to know what mistake that I made.
