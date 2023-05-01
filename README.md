@@ -13,7 +13,7 @@ The repository is divided into topics, and each topic's material is contained wi
 *Skills: Data Analysis, Mathematics, Statistics, Pandas, Numpy, Scipy*
 
 1. Topic 1 - Predict Hotel Cancellations
-2. Topic 2 - Predict Student Performance From Game Play (from Kaggle) (on going)
+2. Topic 2 - Predict Student Performance From Game Play (from Kaggle)
 3. Topic 3 - Electric Moped Reviews (for DataCamp DS Associate Certificate)
 4. Topic 4 - Portfolio Risk Management
 5. Topic 11 - Recommendation Systems (ongoing)
