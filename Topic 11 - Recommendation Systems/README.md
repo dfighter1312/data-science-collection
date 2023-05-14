@@ -2,7 +2,10 @@
 
 ## What this repository does?
 
-This repository contains a course note from **Building Recommendation Engines in Python** on DataCamp as well as a mini-project to build a recommendation engine with knowledge taken from the course (I am just planning on this, but tend to take a dataset from Kaggle and then build it from collected data).
+This repository contains a course note from **Building Recommendation Engines in Python** on DataCamp as well as a mini-project to build a recommendation engine with knowledge taken from the course, including:
+
+- Non-personalized recommendation (`content-based-recommendations.ipynb`)
+- Content-based recommendation (`non-personalized-recommendations.ipynb`)
 
 ## Struggle and Derived Tips during implementation
 
