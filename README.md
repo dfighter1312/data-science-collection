@@ -8,7 +8,7 @@ Hope that the set of projects will inspire you guys who are also having passion 
 
 The repository is divided into topics, and each topic's material is contained within a folder. There are 3 aspects covered across the topics, and I will index it in this `README.md` file.
 
-### Exploratory Data Analysis (current focus)
+### Exploratory Data Analysis
 
 *Skills: Data Analysis, Mathematics, Statistics, Pandas, Numpy, Scipy*
 
@@ -25,6 +25,8 @@ The repository is divided into topics, and each topic's material is contained wi
 1. Topic 5 - Crawling News with Scrapy
 2. Topic 6 - Crawling Dynamic Website with Selenium
 3. Topic 7 - Big Data Processing with PySpark
+4. Topic 12 - MLFlow (ongoing)
+5. Topic 13 - LangChain (planning)
 
 ### Machine Learning Algorithms
 
@@ -33,3 +35,9 @@ The repository is divided into topics, and each topic's material is contained wi
 1. Topic 8 - Graph Neural Networks
 2. Topic 9 - Generative Adversarial Networks
 3. Topic 10 - BERT and Large Language Models (using Hugging Face)
+
+### Research Topics
+
+*Skills: Writing and Understanding*
+
+1. Topic 14 - (planning)

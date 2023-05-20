@@ -1,0 +1,30 @@
+artifact_path: sk_models
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.9.16
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.2.2
+mlflow_version: 2.3.2
+model_uuid: 49c929aced3c45eaa0a2f0e9b426624f
+run_id: b4ce000a9ff94b3a9dfd77a64d6840fc
+signature:
+  inputs: '[{"name": "clonesize", "type": "double"}, {"name": "honeybee", "type":
+    "double"}, {"name": "bumbles", "type": "double"}, {"name": "andrena", "type":
+    "double"}, {"name": "osmia", "type": "double"}, {"name": "MaxOfUpperTRange", "type":
+    "double"}, {"name": "MinOfUpperTRange", "type": "double"}, {"name": "AverageOfUpperTRange",
+    "type": "double"}, {"name": "MaxOfLowerTRange", "type": "double"}, {"name": "MinOfLowerTRange",
+    "type": "double"}, {"name": "AverageOfLowerTRange", "type": "double"}, {"name":
+    "RainingDays", "type": "double"}, {"name": "AverageRainingDays", "type": "double"},
+    {"name": "fruitset", "type": "double"}, {"name": "fruitmass", "type": "double"},
+    {"name": "seeds", "type": "double"}, {"name": "fruit_seed", "type": "double"}]'
+  outputs: '[{"name": "yield", "type": "double"}]'
+utc_time_created: '2023-05-20 12:38:30.828476'
