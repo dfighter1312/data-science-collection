@@ -6,7 +6,7 @@ Hope that the set of projects will inspire you guys who are also having passion 
 
 ## Structure of the repository
 
-The repository is divided into topics, and each topic's material is contained within a folder. There are 3 aspects covered across the topics, and I will index it in this `README.md` file.
+The repository is divided into topics, and each topic's material is contained within a folder. There are 4 aspects covered across the topics, and I will index it in this `README.md` file.
 
 ### Exploratory Data Analysis
 
@@ -16,7 +16,7 @@ The repository is divided into topics, and each topic's material is contained wi
 2. Topic 2 - Predict Student Performance From Game Play (from Kaggle)
 3. Topic 3 - Electric Moped Reviews (for DataCamp DS Associate Certificate)
 4. Topic 4 - Portfolio Risk Management
-5. Topic 11 - Recommendation Systems (ongoing)
+5. Topic 11 - Recommendation Systems
 
 ### Data Engineering
 
@@ -25,7 +25,7 @@ The repository is divided into topics, and each topic's material is contained wi
 1. Topic 5 - Crawling News with Scrapy
 2. Topic 6 - Crawling Dynamic Website with Selenium
 3. Topic 7 - Big Data Processing with PySpark
-4. Topic 12 - MLFlow (ongoing)
+4. Topic 12 - MLFlow
 5. Topic 13 - LangChain (planning)
 
 ### Machine Learning Algorithms
@@ -40,4 +40,4 @@ The repository is divided into topics, and each topic's material is contained wi
 
 *Skills: Writing and Understanding*
 
-1. Topic 14 - (planning)
+1. Topic 14 - Background and Considerations for LLMOps
