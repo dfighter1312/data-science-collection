@@ -42,4 +42,4 @@ Since it is a set of mini-projects, there is no or just a little overlap between
 
 *Skills: Writing and Understanding*
 
-1. Topic 14 - Background and Considerations for LLMOps (planning)
+1. [Topic 14 - Background and Considerations for LLMOps (planning)](Topic%2014%20-%20LLMOps%20Discussion)
