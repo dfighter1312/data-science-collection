@@ -28,7 +28,7 @@ Since it is a set of mini-projects, there is no or just a little overlap between
 2. [Topic 6 - Crawling Dynamic Website with Selenium](Topic%206%20-%20Crawling%20Dynamic%20Website%20with%20Selenium)
 3. [Topic 7 - Big Data Processing with PySpark](Topic%207%20-%20Big%20Data%20Processing%20with%20PySpark)
 4. [Topic 12 - MLFlow](Topic%2012%20-%20MLFlow)
-5. Topic 13 - LangChain (planning)
+5. [Topic 13 - LangChain (ongoing)](Topic%2013%20-%20LangChain)
 
 ### Machine Learning Algorithms
 
