@@ -36,6 +36,7 @@ Proprietary or Open-source? On-premise or in the cloud? Should some transferring
 
 9. "Building LLM applications for production" (Blog) [[link]](https://huyenchip.com/2023/04/11/llm-engineering.html).
 10. "LLMOps (LLM Bootcamp)" (Video) [[link]](https://www.youtube.com/watch?v=Fquj2u7ay40).
+11. "Efficiently Scaling and Deploying LLMs" (Video) [[link]](https://www.youtube.com/watch?v=AVccFl8-5-8).
 
 ## Motivation
 
