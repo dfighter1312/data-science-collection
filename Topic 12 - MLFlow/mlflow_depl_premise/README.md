@@ -4,7 +4,7 @@
 
 The deployment architecture is equivalent to Scenario 4 from the [MLFlow Documentation](https://mlflow.org/docs/latest/tracking.html).
 
-![scenario_4.png](Scenario 4)
+![Scenario 4](scenario_4.png)
 
 To the best of my knowledge, S3 remote host is used for storing model artifacts, while the remote host is used for storing metadata to display to the tracking UI (metrics, tags, logs, filepath, etc.)
 
