@@ -7,13 +7,11 @@ This is a short practice of MLFlow for experiment tracking and deploying models 
 **The problem used for creating models:**
 - Prediction of Wild Blueberry Yield (from [Kaggle](https://www.kaggle.com/competitions/playground-series-s3e14)) - using Machine Learning models.
 - Electric Power Prediction - using Deep Learning lightweight models.
-- Sentiment Analysis - using LLM.
 
 **Functionalities explored with MLFlow:**
 1. Experiment Tracking from Notebooks.
 2. Serving Models.
-3. Setting things up with a docker-compose file (all resources are on local).
-4. Setting things up with a docker-compose file (all resources are on AWS).
+3. Setting things up with a docker-compose file.
 
 ## How to run this repository?
 
@@ -140,9 +138,44 @@ Then make a POST request to `localhost:5000/invocations` with the following JSON
 }
 ```
 
+### Deploying MLFlow Server
+
+**Go to `mlflow_depl_llm` folder**
+
+```bash
+cd mlflow_depl_llm
+```
+
+**Create `.env` file**
+
+It should have the following fields:
+
+```
+AWS_ACCESS_KEY_ID=minio
+AWS_SECRET_ACCESS_KEY=minio123
+MYSQL_DATABASE=mlflow_database
+MYSQL_USER=mlflow_user
+MYSQL_PASSWORD=mlflow
+MYSQL_ROOT_PASSWORD=mysql
+```
+
+**Run the docker-compose file**
+
+```bash
+docker-compose up -d --build
+```
+
+**Validating services are on**
+- Checking status of the containers
+- Go to `localhost:7777` to access MLFlow UI.
+- Go to `localhost:9000` to access MinIO UI.
+- Set tracking URI of any notebook to `http://localhost:7777` to see whether experiment results are updated to the UI.
+
+It is beneficial to read README.md under the `mlflow_depl_premise` repository (not this README file). I have explained what I have understood about the structure of this repository.
+
 ## Struggle and Derived Tips during implementation
 
-To be updated
+This is more likely to be a review on MLFlow, which includes in a technological stack in a project that I have worked on. In summary, MLFlow supports a vast amount of components in a modern Machine Learning Operations (MLOps) cycle, including experimental tracking, model registry, metadata store, and model serving. It also supports a variety of machine/deep learning libraries to be integrated
 
 ## References
 
