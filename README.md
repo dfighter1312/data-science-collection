@@ -27,7 +27,7 @@ Since it is a set of mini-projects, there is no or just a little overlap between
 1. Topic 5 - Crawling News with Scrapy
 2. Topic 6 - Crawling Dynamic Website with Selenium
 3. Topic 7 - Big Data Processing with PySpark
-4. Topic 12 - MLFlow (ongoing)
+4. Topic 12 - MLFlow
 5. Topic 13 - LangChain (planning)
 
 ### Machine Learning Algorithms
