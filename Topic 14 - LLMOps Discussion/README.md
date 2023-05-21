@@ -4,7 +4,7 @@
 
 This is a special topic where I focus on the theoretical aspect rather than implementation. The topic is LLMOps, or in other word, Large Language Model Operations. The term may not be widely accepted since it is closely related to MLOps (Machine Learning Operations), with the only difference is that we are having a really complex model (except for proprietary models where we only have an access to the model via APIs, not the source code itself).
 
-I have found several useful material so far, and will analyze it a bit, one by one, to see how the world discusses about Large Language Model. You can find them in the References section.
+I have found several useful material so far, and will analyze it a bit, one by one, to see how the world discusses about Large Language Model, in the Report section. You can find them in the References section.
 
 ## References
 
@@ -50,3 +50,7 @@ So far, I took part in an interview for a team that tries to employ LLM for ther
 *In financial aspect*, every token counts. For open-source model that we would like to "download" it, fine-tuning it, then deploy it, then how much cost should it be. If context window is limited, so is our budget.
 
 Although I do not know that I will be part of a team that employs a LLM model or not, this should worth exploring for any other machine learning or deep learning architecture for any problem that artificial intelligence can be a great supporter.
+
+## Report
+
+To be updated.
