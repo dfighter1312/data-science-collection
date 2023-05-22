@@ -150,7 +150,10 @@ These will be discussed soon in the report.
 
 ### Chapter 3: LLMOps
 
-To be updated
+**Summary of collected references**
+
+For those who does not read or watch any of the references in the LLMOps discussions part, here are a bit keywords that summarizes the discussions:
+- "Building LLM applications for production" by Huyen Chip [9]: Prompt engineering are facing with a challenge of ambiguity, i.e., answers from LLM is not always the same, or inconsistent. The blog provides some techniques to improve the usefulness and consistency of those answers. The most obvious one is to modify the `temperature` argument to 0. Besides, similar to feature engineering & model development, prompt engineering should have act as a set of experiments, where we need to track tested prompts, version the prompts like models, evaluating the prompts, and optimizing the prompts to get the highest evaluation. Cost and latency are considerations to decide between buy (using paid APIs) vs. build (using open source models). Integration of your own data and then use LLM to query information as well as get insight for end-users is a potential path, in which LangChain provided (LangChain is not discussed in the blog). This is followed by the popularity of vector databases to store and retrieve documents. A discussion about an agent which was built on top of LLMs and includes 3 steps is provided. The tasks are: (1) convert natural language input from user to SQL query [LLM], (2) execute SQL query in the SQL database [SQL executor], (3) convert the SQL result into a natural language response to show user. Having this instructions should increase the expected output that a LLM can return.
 
 ### Chapter 4: Conclusion
 
