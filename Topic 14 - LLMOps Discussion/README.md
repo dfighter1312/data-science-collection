@@ -10,7 +10,7 @@ I have found several useful material so far, and will analyze it a bit, one by o
 
 ### Theoretical Background on Transformers and GPTs
 
-Understanding Flow: Attention Mechanism --> Transformer --> GPT (decoder of Transformer) --> GPT-1 --> GPT-2 (unsupervised learning) --> GPT-3 (providing context) --> Reinforcement Learning with Human Feedback --> InstructGPT.
+Understanding Flow: Attention Mechanism --> Transformer --> GPT (decoder of Transformer) --> GPT-1 --> GPT-2 --> GPT-3 --> Reinforcement Learning with Human Feedback --> InstructGPT.
 
 In fact there is a report of GPT-4, but it is just a report of how the new one improves.
 
@@ -54,4 +54,104 @@ Although I do not know that I will be part of a team that employs a LLM model or
 
 ## Report
 
-To be updated.
+This is not the final version. The report will be updated regularly since there may be some mistakes that I made or some representation I found confusing during writing.
+
+### Chapter 1: Attention, everyone
+
+*"You just want attention, you don't want my heart"* - This might be true for some aspects in Natural Language Processing since the attention-based architecture has become state-of-the-art wrecker in many NLP tasks. But what is actually attention? In translation tasks, is it like looking for a word then simply translated it in a rule-based manner? Gladly, the answer is no.
+
+But before going anywhere further, let state an example that is widely used to explain the concept of attention mechanism: *Neural Machine Translation*.
+
+**Neural Machine Translation**
+
+Neural machine translation (NMT) is an approach to machine translation that uses an artificial neural network to predict the likelihood of a sequence of words, typically modeling entire sentences in a single integrated model.
+
+For instance, we want to translate: *It's time for tea* (EN) to *c'est l'heure du thé* (FR) or *Đã đến giờ uống trà* (VI). The high-level target is to get
+$$P(\text{c'est l'heure du thé} | \text{It's time for tea})$$
+have the highest value comparing to any other French sentence. But sadly, the number of possible combinations to generate a sentence, in any language, can be non-trivial to count. Therefore, we want to get each token, one by one, have the highest probability.
+
+$$P(\text{c'est} | \text{It's time for tea -})$$
+  
+$$P(\text{l'heure} | \text{It's time for tea - c'est})$$
+  
+$$P(\text{du} | \text{It's time for tea - c'est l'heure})$$
+  
+$$P(\text{thé} | \text{It's time for tea - c'est l'heure du})$$
+
+This is actually the right objective when we use word tokenization, if we used byte-pair encoding tokenization, some word would have been splitted into small chunks. However, the aim is still there, predicting the next token.
+
+**Query, Key and Value**
+
+Something familiar here. Is this the database course? Or a Python course where we are learning about dictionary? No, of course.
+
+In machine translation task, we will have:
+- Query as the original sentences.
+- Key as the translated sentences.
+- Value as the translated sentences (same as key).
+
+Imagine you have booked a room in a hotel, and you tell the receptionist that *"I have booked the room with reservation code SH38I5"* (query). The receptionist looks up in their booking system, and found that reservation code you gave matches a room with number 2033 (key), so she give you the key and enter the room (value).
+
+That is easy when any query can be mapped to a key, but we want more, as in tranlation, we want to look at more than 1 word to form the correct translation, for looking for the correct tense, subject, etc.
+
+Now, the booking system earned its magic, and customers can book more than 1 room per reservation. In fact, the number of rooms can unnecessarily be an integer. They can book 70% facilities of a room, and 20% of another room. Finally, when they arrive with the query, the receptionist gives them a crafted key with the access to both rooms.
+
+Back to the machine translation task, with 2 languages, we will have 2 independent vector spaces with same number of dimensions. Each word/token becomes a vector in the corresponding vector space. We now want to find the best translation from a word in vector space A to a word in vector space B, but consider the context of the original sentence. In particular, when finding the translation for the word "đi" in the sentence "Tôi đi xem phim tối hôm qua" (VI), the correct translation should be "went", not "go" or "goes". What should be taken into consideration is the word "đi", "hôm" and "qua" (hôm qua = yesterday, so past tense is restricted). How these words are taken by the model? Just simply looking for "similarity". But it doesn't mean that "hôm" and "qua" is similar to "đi", it may just represent that these are the word that supports you for finding the best translation, with the ultimate word here, "đi".
+
+Later on, you will find that in encoder part of the transformer, query, key and value are the same, since we are having only 1 sentence to process.
+
+**Scaled Dot-Product Attention**
+
+Go straight to the formula:
+
+$$\text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+
+where $Q$ is query, $K$ is key, and $V$ is value matrix.
+
+- $QK^T$ is the computation to find the "similarity" between token. The output matrix, let say $O$, will have $o_{ij} = q_i \dot k_j$, or the similarity between token $i$ and token $j$ of the 2 sentences (or at the same sentence if we are using one only).
+- $\sqrt{d_k}$ is the scaling factor. In the paper [1], they assume that the components of $q$ and $k$ are independent random variables with mean 0 and variance 1. Then their dot product has mean 0 and variance $d_k$. If another assumption is added, *the variables are normally distributed*, then it is easily figured out they are scaling the values by subtracting mean (0) from the original values then divide it by the standard deviation $\sqrt{d_k}$.
+- Use softmax to normalize each query sum to one, then we obtain the weights.
+- Finally, the weights and value matrices are multiplied.
+
+Depending on the key and value matrices computation, we will have 3 different types of attention.
+- The example given for machine translation is **encoder-decoder attention**, where they query and key are from difference sentence.
+- If the query and key are the same, we will have **self-attention**.
+- If the query and key are the same, and queries don’t attend to future positions, we will have **masked self-attention**.
+
+Transformer architecture employs only self-attention and masked self-attention. Since in the encoder part, we have only 1 sentence to process. The aim is to enrich each token reprsentation by considering neighboring tokens every time it is passed to a layer. The decoder part use masked self-attention because we don't know about things will be in the future (we have not generated predictions for those yet).
+
+**Multi-Head Attention**
+
+The aim of multi-head attention is to learn multiple relationships between the words from the query and key matrices. I may assume that there is a head computing the "financial" relationship between 2 tokens, other one is considering "political" relationship, other one is considering "scientific" relationship, etc.
+
+At a high-level explanation, multi-head attention is just combining the results for many self-attention modules (or heads), in a proper manner.
+
+**Transformer Architecture**
+
+You may see this figure a lot of times, if you are working on NLP. But I still show it here though.
+
+![transformer](transformer.png)
+
+There are additional concepts that are included and help increase the performance of the transformer family (add & norm, or positional encoding). It won't be discussed in this report currently but will be added when I have more time.
+
+### Chapter 2: GPT
+
+**Overview**
+
+The below figure from a [blog](https://huyenchip.com/2023/05/02/rlhf.html) demonstrates how ChatGPT is trained.
+
+![ChatGPT Training](chatgpt-training.png)
+
+From a quick search, I know that:
+- GPT-1 and GPT-2 applied unsupervised pre-training and supervised fine-tuning.
+- GPT-3 elaborates with few-shot learning (providing some examples first, then ask the question) to obtain better answers.
+- GPT-3.5 (ChatGPT) exposes a reward model and training by that reward model, taken from reinforcement learning from human feedback.
+
+These will be discussed soon in the report.
+
+### Chapter 3: LLMOps
+
+To be updated
+
+### Chapter 4: Conclusion
+
+To be updated
