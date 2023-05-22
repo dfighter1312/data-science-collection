@@ -137,24 +137,159 @@ There are additional concepts that are included and help increase the performanc
 
 **Overview**
 
+GPT is built as a multi-layer Transformer decoder for the language model, which is a variant of the transformer.
+
 The below figure from a [blog](https://huyenchip.com/2023/05/02/rlhf.html) demonstrates how ChatGPT is trained.
 
 ![ChatGPT Training](chatgpt-training.png)
 
-From a quick search, I know that:
-- GPT-1 and GPT-2 applied unsupervised pre-training and supervised fine-tuning.
-- GPT-3 elaborates with few-shot learning (providing some examples first, then ask the question) to obtain better answers.
-- GPT-3.5 (ChatGPT) exposes a reward model and training by that reward model, taken from reinforcement learning from human feedback.
+**Unsupervised pre-training**
 
-These will be discussed soon in the report.
+First found: GPT-1.
+
+The objective of this stage is rather simple, similar to what we have defined in the neural machine translation part in the first chapter. In particular, given a vast corpus, which is a set of documents. Each documents contain a list of tokens, from $u_1$ to $u_k$. The model aims to maximize the likelihood:
+
+$$L_1 = \sum_i \log P(u_i | u_{i-k}, \dots, u_{i-1}; \Theta)$$
+
+**Supervised fine-tuning**
+
+First found: GPT-1.
+
+This works on a labeled dataset $C$, where each instance consists of a sequence $x^1$ to $x^m$ along with a label $y$. The objective of this task is to maximize:
+
+$$L_2 = \sum_{(x, y)} \log P(y|x^1, \dots, x^m)$$
+
+It is demonstrated in the paper that in this stage, the loss can be a combination from both tasks:
+
+$$L_3 = L_2 + \lambda \times L_1$$
+
+where $\lambda$ is the weight of the first loss objective. This loss function improves generalization of the supervised model and accelerates convergence.
+
+**Defining downstream tasks**
+
+Found: GPT-1, GPT-2
+
+In GPT-1, defining the task is done by a set of special tokens. For example, we will have start token and end token in general, premise indicator token and hypothesis indicator token for textual entailment, document, question, answer indicator tokens for question answering, etc.
+
+![GPT-1](gpt-1.png)
+
+However, in GPT-2 paper, they believe that including the task in the inputs can still enable the language models to give a sufficiently acceptable output. For example: *“Brevet Sans Garantie Du Gouvernement”, translated to
+English* gives the output *Patented without government warranty.* without any specification of task-specific special tokens.
+
+The above example is known as zero-shot learning, where the task can be inferred from the prompt, but note that the task should have some examples included in the training dataset.
+
+**Zero-shot, one-shot, few-shot learning**
+
+First found: GPT-3
+
+The paper demonstrated the concept of in-context learning, which is learning from the prompt itself.
+
+![GPT-3](gpt-3.webp)
+
+It showed that with a task description and few examples, language model is able to give the desirable answer.
+
+**Reinforcement Learning with Human Feedback**
+
+Reinforcement learning, in my simple view, equals an agent + environment. Agent does action following a policy (policy in this case is the model architecture and weights), environment returns reward. There is also a term, space, but I am ignoring it for simplicity.
+
+In language modeling, the agent is the LM, and the action space is indefinite, which is combination of tokens forming a conversation. Since we are dealing with continuous action space, policy gradient methods is suitable for defining the best policy (model weights), for example, proximal policy optimization.
+
+But what about the reward, how to form the environment. As the name says, human feedback will form the environment, as in the below figure demonstrating the process of fine-tuning with RLHF:
+
+![rlhf](rlhf.png)
+
+Overall, you can read this [blog](https://huyenchip.com/2023/05/02/rlhf.html), another nice blog by Huyen Chip for understanding how the training process of GPT is conducted intuitively and mathematically.
 
 ### Chapter 3: LLMOps
 
 **Summary of collected references**
 
 For those who does not read or watch any of the references in the LLMOps discussions part, here are a bit keywords that summarizes the discussions:
-- "Building LLM applications for production" by Huyen Chip [9]: Prompt engineering are facing with a challenge of ambiguity, i.e., answers from LLM is not always the same, or inconsistent. The blog provides some techniques to improve the usefulness and consistency of those answers. The most obvious one is to modify the `temperature` argument to 0. Besides, similar to feature engineering & model development, prompt engineering should have act as a set of experiments, where we need to track tested prompts, version the prompts like models, evaluating the prompts, and optimizing the prompts to get the highest evaluation. Cost and latency are considerations to decide between buy (using paid APIs) vs. build (using open source models). Integration of your own data and then use LLM to query information as well as get insight for end-users is a potential path, in which LangChain provided (LangChain is not discussed in the blog). This is followed by the popularity of vector databases to store and retrieve documents. A discussion about an agent which was built on top of LLMs and includes 3 steps is provided. The tasks are: (1) convert natural language input from user to SQL query [LLM], (2) execute SQL query in the SQL database [SQL executor], (3) convert the SQL result into a natural language response to show user. Having this instructions should increase the expected output that a LLM can return.
+- *"Building LLM applications for production" by Huyen Chip* [9]: Prompt engineering are facing with a challenge of ambiguity, i.e., answers from LLM is not always the same, or inconsistent. The blog provides some techniques to improve the usefulness and consistency of those answers. The most obvious one is to modify the `temperature` argument to 0. Besides, similar to feature engineering & model development, prompt engineering should have act as a set of experiments, where we need to track tested prompts, version the prompts like models, evaluating the prompts, and optimizing the prompts to get the highest evaluation. Cost and latency are considerations to decide between buy (using paid APIs) vs. build (using open source models). Integration of your own data and then use LLM to query information as well as get insight for end-users is a potential path, in which LangChain provided (LangChain is not discussed in the blog). This is followed by the popularity of vector databases to store and retrieve documents. A discussion about an agent which was built on top of LLMs and includes 3 steps is provided. The tasks are: (1) convert natural language input from user to SQL query [LLM], (2) execute SQL query in the SQL database [SQL executor], (3) convert the SQL result into a natural language response to show user. Having this instructions should increase the expected output that a LLM can return.
+- *"LLMOps" from LLM Bootcamp* [10]: The speaker provided a full process of developing and deploying LLM in production. However, he preferred to deliver the talk on buying rather than building. This is understandable since new practitioners may take the life at risk if they thoughtlessly decided to build, deploy, and maintain and LLM for their firms. The process consists of: choosing the base model, iteration and prompt management, testing, deployment, monitoring, continual improvement and fine-tuning. Considerations for choosing a base model comprise: expected quality for your downstream task, latency, cost, fine-tuneability, data security. When data security may not be a major problem, most use cases can be adapt using GPT-4 or proprietary LLMs, which are stated as better nowadays by the speaker. Same topics were delivered in prompt management to Chip's blog. Testing LLM requires (1) the prompts in developing (for prompt tuning) and production must not too different, and (2) an evaluation scheme should be proposed, where the ground truth can be a correct defined answer, a referenced answer, previous answer, or human feedback. After deployment, monitoring important signals is essential, such as: outcomes & user feedback, proxy metrics, incorrect in measurement, etc. At the end of the talk, the speaker gave a test-driven development taxonomy for LLMOps. It starts with prompt/chain development, logging and monitoring, then fine-tuning when needed. The process is iteratively, and the collaborators expand from developer, team, and finally the customer.
+- *"Efficiently Scaling and Deploying LLMs"* [11]: In contrast to [10], the speaker considered more on building a LLM. The decision of building LLM is mostly by data ownership, controllability, and model ownership. Competitors want their stuff private and use it to train their model with better introspection, explainability, and portability. There are two mythical barriers for practitioners when deciding to build a model instead of using the APIs. First is LLM training is too expensive, and second is planning for the technological stack and deployment strategies are extreme. However, the speaker stated that deploying a GPT with 7 billions tokens takes only 30k USD, which is the common use case in business. In addition, the community is developing new tools for supporting deployment of LLMs. Finally, there is a LLM training stack that consists a list of tools can be used for developing LLMs, and I believe the list will be expanded through time, even if the video is a few-weeks or few-months old.
+
+**Planning simulation for applying LLM**
+
+I will apply something I have learned on product management, which I studied for data science interview, to brainstorming the options for developing a LLM-supported application.
+
+*Problem Statement:* Simple! We need to have ChatGPT in our learning app.
+
+But the more short the problem statement, the more questions we need to ask for clarifying the problem. Sadly, this is the statement that most customers ask, especially in Vietnam.
+
+The five steps in brainstorming a solution, if we want to develop things systematically, includes:
+1. Clarify
+2. Constraints
+3. Plan
+4. Method
+5. Conclude
+
+**Step 1: Clarify**. In broader terminology, the customer want to use Large Language Model to improve the user experience in their learning application. I believe that the reason they claim ChatGPT because this is the most popular and may be the only one they know, so I will try to explain that we may decide to use ChatGPT or other LLM depending on the constraints.
+
+Another thing we need to clarify is the domain they are teaching. It only includes school programs, technical programs, or anything else. There are many domain-related questions that can be asked in this stage, and even when you proceed to the next stage, some will still be pop up.
+
+We need to define is the objective. Sometimes, even deciding to use LLM can be such a waste due to the fact that it does not contribute anything to the business goals. Revenue and user engagement for web/mobile apps are the most ultimate goals, of course, but we want to explore how LLM benifits the organization. For this case, let say the customer is currently having an interactive Q&A section for users, where hired employees (experienced teachers) will answer some of users' concerns in their homeworks or lectures. By using LLM, we can reduce the cost of hiring these teachers, and have them work on other tasks, such as improving the curriculum for the courses, building more interesting teaching content, etc. (doing other creative tasks are more lenient than firing them because of the existance of an AI model).
+
+Next is to define more fine-grained goals. The ones we have discussed so far form **organization goal metrics**: revenue, user engagement, and employee efficiency. We need to have **driver metrics** and **guardrail metrics**. Driver metrics are the ones derived from the goal metrics, but they are measurable, attributable, sensitive, and timely. Several recommended metrics are session time, number of monthly active users, user feedback, employee feedback and revenue lift. Guardrail metrics are the one we track to see whether there is any external factor that effects user experience, such as latency.
+
+Goals are important for evaluation of the whole features, using A/B testing, or just simply tracking the values, and it is a broader term comparing to evaluation of the model (accuracy).
+
+**Step 2: Constraints**
+
+Exploring the user journey is a practice for constraining things. From logging in, how they access to the feature, and how it ends. There may be multiple scenarios:
+
+- Scenario 1: User logs in and select a course. After learning a lesson, user can employ LLM to ask something around that lesson that the student is not clear. Also, each lesson attaches to a set of exercise, where students do have access to this to get some instructions. Note that only instructions are provided, not the full answers.
+- Scenario 2: User logs in and select a course, user can ask anything relating to the course that they are not fully understand, for ask the LLM to generate a set of questions to work on.
+- Scenario 3: User ask LLM to recommend a learning path based on the list of available courses from the application.
+
+Other constraints include budget, time for development, needs for data privacy, control, specificity of the data (they are regularly updated or school-book knowledge), etc. These will help us identify whether to build or to buy, which forms of the dataset it should be, and technological stacks.
+
+After identifying the user journey, we will summarize the ideas of developing an LLM model:
+- The feature will be included in which section of the application.
+- What the feature benefits the organization.
+- What are the constraints for building the feature.
+
+**Step 3: Plan**
+
+Some substeps I can think of so far is:
+- Data collection (in prompt/context pair).
+- Model development.
+- Testing.
+- Launching.
+- Maintenance.
+
+Details of each substep will be defined in the next step, if all of these are approved by team members.
+
+**Step 4: Method**
+
+First, *data collection* is defined from the information retrieved from the constraint step. Suppose we are required to have LLM answer lesson-specific questions. We may need a dataset with the below format:
+
+```json
+{
+    "context": "You are a lecturer in <course_name> course teaching <lesson_name>, and a student is asking you a question. You should see whether it is related to the lesson, then answer it clearly if it is related.",
+    "prompt": "What is <something_here>?",
+    "answer": "<some_answers_here>"
+}
+```
+
+Of course this is not an effective prompt, but just one for demonstration.
+
+Second, *model development* is when we decide about which model to be based on, and how we develop the model. This also largely depends the constraints specified in step 2. Reading the references will give you a better intuition in defining the strategies. For example, I believe the most important factor to decide between buying and building is that the application is teaching common knowledge or advanced and domain-specific one. If it is the latter case, then data ownership is required because that is the business advantage of the organization, and deploying a model may be considered. The model development can follow [10], with prompt management, testing, deployment, monitoring, continual improvement and fine-tuning iteratively.
+
+Third, *testing*. This differs from testing in model development, we are testing the feature. The feature should be available for only a set of users to conduct the A/B test. Unexpected outcome may happen where the fault is not of LLM, but other factors such as the UI. We compare the metrics and goals (driver and guardrail) specified in step 1 to get efficiency of using a large language model, and analyze the factors that increase/decrease the value of those metrics.
+
+Fourth, *launching* is when we are confident about the efficiency of the feature. After launching, instrumentation must be ensured to work properly for conducting the final step, *maintenance*.
+
+**Step 5: Conclude**
+
+It is similar to making a summary of what we have made so far. For example:
+
+- We have built a feature leveraging LLM to improve user engagement, revenue, and employee efficiency by using LLM to answer lesson-specific questions for the users, and generate customized sets for them for practice, which reduces the effort that an employee should have made, and we have them work on more creative tasks.
+- A/B test with 20% importance of user feedback, 20% importance of average active session time, 30% importance of revenue lift, and 30% importance of employee feedback shows that the feature is ready for production.
+- After launching the feature, we observe positive changes in all organization goal metrics.
 
 ### Chapter 4: Conclusion
 
-To be updated
+From Chip's blog, *"We’re still in the early days of LLMs applications – everything is evolving so fast."*. Finding a job in which you do the same thing day by day is no longer safe. But with the help of artificial intelligence, I believe that we will be able to increase our flexibility.
+
+There are many other aspects in LLMs that should lead to a discussion, so I will try to explore it more and may update to this topic or create a new topic.
