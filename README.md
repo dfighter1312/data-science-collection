@@ -2,7 +2,7 @@
 
 **Owner:** Hoang-Dung Nguyen (Nguyễn Hoàng Dũng). Fresh Graduate from Ho Chi Minh City University of Technology, from Computer Science, but are in love with Data Science.
 
-Hope that the set of projects will inspire you guys who are also having passion with Data Science. I know this is a vast field, and I am sometimes dizzy as well when learning this and knowing that something I have learned would not benefit me in getting a job (I am still somehow unemployed, so please give me a job to embrace myself), but I believe the journey to become a Data Scientist will grow gradually for me.
+Hope that the set of projects will inspire you guys who are also having passion with Data Science. I know this is a vast field, and I am sometimes dizzy as well when learning this and knowing that something I have learned would not benefit me in getting a job (I am still somehow unemployed, so please give me a job to embrace myself), but I believe the journey to become a Data Scientist will grow gradually in me.
 
 ## Structure of the repository
 
