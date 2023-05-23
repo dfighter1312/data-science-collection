@@ -1,1 +1,4 @@
 .env
+/notebooks/rtdocs/
+/notebooks/.chroma/
+/notebooks/train.jsonl
