@@ -37,6 +37,7 @@ Since it is a set of mini-projects, there is no or just a little overlap between
 1. [Topic 8 - Graph Neural Networks](Topic%208%20-%20Graph%20Neural%20Networks)
 2. [Topic 9 - Generative Adversarial Networks](Topic%209%20-%20Generative%20Adversarial%20Networks)
 3. [Topic 10 - BERT and Large Language Models (using Hugging Face)](Topic%2010%20-%20BERT%20and%20Large%20Language%20Models)
+4. [Topic 15 - The PyTorch Family (PyTorch, PyTorch Geometric, PyTorch Lightning)](Topic%2015%20-%20The%20PyTorch%20Family)
 
 ### Research Topics
 

@@ -10,6 +10,42 @@ In the second stage, I will go through mostly all of the [tutorials](https://pyt
 
 The experiments are done in the `notebooks` folder.
 
+## How to run the repository?
+
+In order to run all the notebooks in this repo, please follow the steps:
+
+### Entering the topic folder
+
+```bash
+cd "Topic 13 - LangChain"
+```
+
+### (Optional, but recommended) Create a new conda environment
+
+```bash
+conda create --name langchain
+```
+
+### Install all the packages
+
+```bash
+pip install -r requirements.txt
+```
+
+### Create `.env` file
+
+Create the file with the content as below:
+
+```bash
+TEST_VAR=Found
+OPENAI_API_KEY=...
+SERPAPI_API_KEY=...
+HUGGINGFACEHUB_API_TOKEN=...
+PINECONE_API_KEY=...
+```
+
+`TEST_VAR` is only used for testing in notebook 1, so you can ignore it. Others are API keys and tokens, where you can get by creating a free account on OpenAI, HuggingFace, SerpAPI and Pinecone. For most notebooks, OpenAI's API Key is required, so if you care only about notebook using LLM but not other APIs, just let it empty.
+
 ## Struggle and Derived Tips during implementation
 
 It was fun exploring this framework, even this is still the beta version. The limitation of my notebook is mostly from the restriction of OpenAI's and Pinecone's API, which raise some warnings and errors in notebook no. 8 and no.9.
