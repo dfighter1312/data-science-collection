@@ -38,6 +38,11 @@ Proprietary or Open-source? On-premise or in the cloud? Should some transferring
 10. "LLMOps (LLM Bootcamp)" (Video) [[link]](https://www.youtube.com/watch?v=Fquj2u7ay40).
 11. "Efficiently Scaling and Deploying LLMs" (Video) [[link]](https://www.youtube.com/watch?v=AVccFl8-5-8).
 
+### Additional References
+
+12. "State of GPT" (Video) [[link]](https://www.youtube.com/watch?v=bZQun8Y4L2A)
+13. "LLM Bootcamp" (Series of Lectures) [[link]](https://fullstackdeeplearning.com/llm-bootcamp/)
+
 ## Motivation
 
 This is a bit odd that a README file in my collection has the motivation part. But it is strong enough that I include it here.
