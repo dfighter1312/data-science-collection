@@ -277,7 +277,7 @@ First, *data collection* is defined from the information retrieved from the cons
 }
 ```
 
-Of course this is not an effective prompt, but just one for demonstration.
+Of course this is not an effective prompt, but just one for demonstration. Initialize several prompt templates can be useful for later experimentation.
 
 Second, *model development* is when we decide about which model to be based on, and how we develop the model. This also largely depends the constraints specified in step 2. Reading the references will give you a better intuition in defining the strategies. For example, I believe the most important factor to decide between buying and building is that the application is teaching common knowledge or advanced and domain-specific one. If it is the latter case, then data ownership is required because that is the business advantage of the organization, and deploying a model may be considered. The model development can follow [10], with prompt management, testing, deployment, monitoring, continual improvement and fine-tuning iteratively.
 
